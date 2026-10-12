@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happiest Birthday Mahiii 🎀</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --cream: #fffaf6;
+  --pink: #df3470;
+  --dark: #704653;
+  --muted: #ad7f8c;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  padding: 25px 12px;
+  font-family: Georgia, serif;
+  color: var(--dark);
+  background:
+    radial-gradient(circle at 10% 20%, #ffe0e9 0, transparent 35%),
+    radial-gradient(circle at 90% 75%, #fbd6e1 0, transparent 35%),
+    linear-gradient(135deg, #fff0f3, #fffaf6, #ffe6ec);
+  overflow-x: hidden;
+}
+
+/* Floating decorations */
+#decorations {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.floaty {
+  position: absolute;
+  bottom: -70px;
+  left: var(--left);
+  font-size: var(--size);
+  opacity: 0;
+  animation: floatUp var(--duration) linear infinite;
+  animation-delay: var(--delay);
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) rotate(-15deg) scale(.7);
+    opacity: 0;
+  }
+  12% { opacity: .8; }
+  50% { transform: translateY(-55vh) rotate(20deg) scale(1); }
+  88% { opacity: .8; }
+  100% {
+    transform: translateY(-115vh) rotate(-25deg) scale(.8);
+    opacity: 0;
+  }
+}
+
+/* Tiny twinkling stars */
+.sparkle {
+  position: absolute;
+  left: var(--left);
+  top: var(--top);
+  color: #e7bd55;
+  font-size: var(--size);
+  animation: twinkle 1.8s ease-in-out infinite alternate;
+  animation-delay: var(--delay);
+}
+
+@keyframes twinkle {
+  from { opacity: .2; transform: scale(.65) rotate(0); }
+  to { opacity: 1; transform: scale(1.25) rotate(25deg); }
+}
+
+/* Main card */
+.card {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 680px);
+  margin: 18px auto;
+  padding: 35px 22px 40px;
+  text-align: center;
+  background: rgba(255, 251, 247, .94);
+  border: 1px solid rgba(255,255,255,.9);
+  border-radius: 65px 65px 12px 12px;
+  box-shadow: 0 15px 55px rgba(176, 105, 130, .12);
+  animation: cardAppear 1s ease-out both;
+}
+
+@keyframes cardAppear {
+  from { opacity: 0; transform: translateY(25px) scale(.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.ribbon {
+  display: block;
+  margin: 0 auto 15px;
+  font-size: 43px;
+  animation: ribbonWiggle 3s ease-in-out infinite;
+}
+
+@keyframes ribbonWiggle {
+  0%, 100% { transform: rotate(-8deg) scale(1); }
+  50% { transform: rotate(8deg) scale(1.12); }
+}
+
+.eyebrow {
+  color: #bd718a;
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 4px;
+  line-height: 1.8;
+  text-transform: uppercase;
+}
+
+h1 {
+  margin: 24px 0;
+  font-size: clamp(36px, 8vw, 59px);
+  line-height: 1.12;
+  font-style: italic;
+  font-weight: normal;
+  animation: titleAppear 1.2s ease both;
+}
+
+h1 span {
+  display: inline-block;
+  color: #d6326b;
+  font-weight: bold;
+}
+
+@keyframes titleAppear {
+  from { opacity: 0; transform: scale(.8); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.subtitle {
+  margin: 30px 0;
+  color: var(--muted);
+  font-size: clamp(17px, 4vw, 25px);
+  line-height: 1.6;
+  letter-spacing: 1px;
+}
+
+/* Birthday illustration */
+.picture-frame {
+  width: min(100%, 445px);
+  margin: 25px auto 30px;
+  overflow: hidden;
+  border-radius: 25px;
+  background: #fff0e8;
+  animation: picturePop 1s .25s cubic-bezier(.2, 1.5, .5, 1) both;
+  transition: transform .3s ease;
+}
+
+.picture-frame:hover {
+  transform: translateY(-5px) rotate(-1deg);
+}
+
+.picture-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+  mix-blend-mode: multiply;
+}
+
+@keyframes picturePop {
+  from { opacity: 0; transform: scale(.65) rotate(-5deg); }
+  to { opacity: 1; transform: scale(1) rotate(0); }
+}
+
+.question {
+  margin: 35px 0 28px;
+  font-size: clamp(20px, 4.8vw, 29px);
+  line-height: 1.5;
+  font-weight: bold;
+}
+
+/* Buttons */
+.buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+}
+
+button {
+  width: min(100%, 340px);
+  min-height: 78px;
+  padding: 19px 20px;
+  border-radius: 34px;
+  font-family: Georgia, serif;
+  font-size: clamp(21px, 5vw, 29px);
+  font-weight: bold;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+button:active {
+  transform: scale(.95);
+}
+
+.yes {
+  color: white;
+  background: linear-gradient(135deg, #ed3977, #c91e5e);
+  border: 1px solid #c92360;
+  box-shadow: 0 11px 0 #a91d50, 0 17px 28px #edb4c9;
+  animation: buttonPulse 2s ease-in-out infinite;
+}
+
+@keyframes buttonPulse {
+  0%, 100% { box-shadow: 0 11px 0 #a91d50, 0 17px 28px #edb4c9; }
+  50% { box-shadow: 0 11px 0 #a91d50, 0 17px 38px #e98cac; }
+}
+
+.yes:hover {
+  transform: translateY(-3px);
+}
+
+.no {
+  width: min(100%, 255px);
+  min-height: 72px;
+  color: #71978b;
+  background: #e6faf2;
+  border: 1px solid #c5e9dc;
+  box-shadow: 0 9px 0 #c6e8dd;
+}
+
+.no:hover {
+  transform: translateY(-3px);
+}
+
+.small-note {
+  margin-top: 28px;
+  color: #b28090;
+  font-size: clamp(15px, 4vw, 22px);
+  line-height: 1.5;
+}
+
+#response {
+  min-height: 28px;
+  margin-top: 20px;
+  color: #c62b65;
+  font-size: 18px;
+  font-style: italic;
+}
+
+.footer {
+  margin-top: 28px;
+  color: #c38b9d;
+  font-size: 24px;
+  letter-spacing: 12px;
+}
+
+@media (max-width: 420px) {
+  body { padding: 12px 9px; }
+  .card { padding: 30px 17px 35px; border-radius: 48px 48px 12px 12px; }
+  .eyebrow { letter-spacing: 2.5px; font-size: 12px; }
+  .picture-frame { margin-top: 20px; }
+  button { min-height: 70px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div id="decorations" aria-hidden="true"></div>
+
+<main class="card">
+  <div class="eyebrow">✦ A tiny page made with love ✦</div>
+
+  <h1>
+    Happiest Birthday,<br>
+    <span>mahiii🫠❤️‍🩹</span>
+  </h1>
+
+  <p class="subtitle">
+    today, the universe is celebrating you ♡
+  </p>
+
+  <div class="picture-frame">
+    <img
+      src="birthday-bunny.png"
+      alt="A cute teddy bear and bunny celebrating with a birthday cake"
+    >
+  </div>
+
+  <p class="question">
+    Are you ready for your little surprise?
+  </p>
+
+  <div class="buttons">
+    <button class="yes" id="yesButton">
+      YES, SHOW ME ♡
+    </button>
+
+    <button class="no" id="noButton">
+      Not yet
+    </button>
+  </div>
+
+  <div id="response" aria-live="polite"></div>
+
+  <p class="small-note">
+    psst... one button may be a little dramatic
+  </p>
+</main>
+  
+<iframe
+  id="moduleFrame"
+  title="Birthday modules"
+  style="display:none; position:fixed; inset:0; width:100%; height:100%; border:0; z-index:1000; background:white;"
+></iframe>
+
+<script>
+/* Floating hearts, bows, flowers and sparkles */
+const decorations = document.getElementById("decorations");
+
+const floatEmojis = ["🍂", "💗", "🎀", "🌸", "", "🎊", "🤍"];
+
+for (let i = 0; i < 24; i++) {
+  const item = document.createElement("span");
+  item.className = "floaty";
+  item.textContent = floatEmojis[i % floatEmojis.length];
+
+  item.style.setProperty("--left", Math.random() * 96 + "%");
+  item.style.setProperty("--size", (16 + Math.random() * 18) + "px");
+  item.style.setProperty("--duration", (9 + Math.random() * 10) + "s");
+  item.style.setProperty("--delay", (-Math.random() * 18) + "s");
+
+  decorations.appendChild(item);
+}
+
+for (let i = 0; i < 15; i++) {
+  const star = document.createElement("span");
+  star.className = "sparkle";
+  star.textContent = ["✦", "✧", "⋆", "✧"][i % 4];
+
+  star.style.setProperty("--left", Math.random() * 96 + "%");
+  star.style.setProperty("--top", Math.random() * 95 + "%");
+  star.style.setProperty("--size", (12 + Math.random() * 15) + "px");
+  star.style.setProperty("--delay", (-Math.random() * 3) + "s");
+
+  decorations.appendChild(star);
+  
+}
+  
+const music = new Audio("./background-music.mp3");
+music.loop = true;
+music.preload = "auto";
+
+const moduleFrame = document.getElementById("moduleFrame");
+const firstModule = document.querySelector("main.card");
+
+function startBirthdayWebsite() {
+    // Start music from the YES button tap
+    music.play().catch(error => {
+        console.log("Music playback blocked:", error);
+    });
+
+    // Hide Module 1 and open Module 2
+    firstModule.style.display = "none";
+    moduleFrame.style.display = "block";
+    moduleFrame.src = "./module2.html";
+}
+/* Yes opens Module 2 */
+
+document.getElementById("yesButton").addEventListener("click", () => {
+    startBirthdayWebsite();
+});
+
+/* A playful response for Not yet */
+const noButton = document.getElementById("noButton");
+const response = document.getElementById("response");
+
+const messages = [
+  "Hehe, Mahiii, the surprise is waiting for you! 🥹🎀",
+  "Just one little tap, please? 🐰💗",
+  "The birthday magic is getting impatient! ✨",
+  "Okayyy, take your time, birthday girl 🫶🏻💕"
+];
+
+let messageIndex = 0;
+
+noButton.addEventListener("click", () => {
+  response.textContent = messages[messageIndex % messages.length];
+  messageIndex++;
+});
+</script>
+</body>
+</html>
